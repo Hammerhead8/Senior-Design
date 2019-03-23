@@ -7,13 +7,13 @@
 
 enum
 {
-	TONE1 = 262,
-	TONE2 = 294,
-	TONE3 = 330,
-	TONE4 = 349,
-	TONE5 = 392,
-	TONE6 = 440,
-	TONE7 = 494
+	NOTE1 = 262,
+	NOTE2 = 294,
+	NOTE3 = 330,
+	NOTE4 = 349,
+	NOTE5 = 392,
+	NOTE6 = 440,
+	NOTE7 = 494
 };
 
 #endif
