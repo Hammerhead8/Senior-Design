@@ -98,37 +98,37 @@ loop ()
     while (beam1.note != 0) {
       beam1.freq = analogRead (A0);
       if (beam1.freq <= 2) {
-        tone (4, TONE1);
+        tone (4, NOTE1);
         while (beam1.freq <= 2) {}
         noTone (4);
       } /* End if */
       else if (beam1.freq >= 3 && beam1.freq <= 60) {
-        tone (4, TONE2);
+        tone (4, NOTE2);
         while (beam1.freq >= 3 && beam1.freq <= 60) {}
         noTone (4);
       } /* End else if */
       else if (beam1.freq >= 61 && beam1.freq <= 120) {
-        tone (4, TONE3);
+        tone (4, NOTE3);
         while (beam1.freq >= 61 && beam1.freq <= 120) {}
         noTone (4);
       } /* End else if */
       else if (beam1.freq >= 121 && beam1.freq <= 280) {
-        tone (4, TONE4);
+        tone (4, NOTE4);
         while (beam1.freq >= 121 && beam1.freq <= 280) {}
         noTone (4);
       } /* End else if */
       else if (beam1.freq >= 281 && beam1.freq <= 460) {
-        tone (4, TONE5);
+        tone (4, NOTE5);
         while (beam1.freq >= 281 && beam1.freq <= 460) {}
         noTone (4);
       } /* End else if */
       else if (beam1.freq >= 461 && beam1.freq <= 750) {
-        tone (4, TONE6);
+        tone (4, NOTE6);
         while (beam1.freq >= 461 && beam1.freq <= 750) {}
         noTone (4);
       } /* End else if */
       else if (beam1.freq >= 751) {
-        tone (4, TONE7);
+        tone (4, NOTE7);
         while (beam1.freq >= 751) {}
         noTone (4);
       } /* End else if */
@@ -211,6 +211,5 @@ ISR (TIMER1_COMPA_vect)
     beam6.freqReads[0] = analogRead (A5);
     beam6.freqReads[1] = analogRead (A5);
     beam6.freqReads[2] = analogRead (A5);
-    beam6.freq = (
-  }*/
+    beam6.freq = ( */
 } /* End ISR */
