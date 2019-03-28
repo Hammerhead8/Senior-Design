@@ -18,6 +18,13 @@ Beam
                                 /* It is set to -1 when the beam is inactive */
     int16_t freqReads[4]; /* Holds the values of four consecutive reads from the ADC.
                           /* These values are then averaged and stored in FREQ */
+
+    volatile int8_t difference = -1; /* Used as a workaround to create atomic
+				      * conditionals in the LOOP function.
+				      * Since the ATMega2560 is an 8 bit MCU
+				      * problems can arise when comparing 16 bit values
+				      * with interrupts enabled. Using an 8 bit value
+				      * eliminates this risk. */
 };
 
 #endif
