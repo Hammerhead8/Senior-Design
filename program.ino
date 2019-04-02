@@ -193,13 +193,13 @@ playBeam1 ()
   if (beam1.note == 1) { /* If the beam is broken */
     beam1.freq = analogRead (A0); /* Read from the ADC */
 
-    if (beam1.freq <= 2) { /* Range for the first note */
+    if (beam1.freq <= 40) { /* Range for the first note */
       beam1.difference = 1; /* Set DIFFERENCE to 1 for the first note */
     }
-    else if (beam1.freq >= 3 && beam1.freq <= 60) { /* Range for the second note */
+    else if (beam1.freq >= 41 && beam1.freq <= 80) { /* Range for the second note */
       beam1.difference = 2; /* Set DIFFERENCE to 2 for the second note */
     }
-    else if (beam1.freq >= 61 && beam1.freq <= 120) { /* Range for the third note */
+    else if (beam1.freq >= 80 && beam1.freq <= 120) { /* Range for the third note */
       beam1.difference = 3; /* Set DIFFERENCE to 3 for the third note */
     }
     else if (beam1.freq >= 121 && beam1.freq <= 280) { /* Range for the fourth note */
