@@ -297,13 +297,13 @@ ISR (TIMER1_COMPA_vect)
     /* Now get the arithmetic mean of the reads */
     beam1.freq /= 4;
 
-    if (beam1.freq <= 2) { /* Range of the first note */
+    if (beam1.freq <= 40) { /* Range of the first note */
       beam1.difference = 1; /* Set DIFFERENCE to 1 for the first note */
     }
-    else if (beam1.freq >= 3 && beam1.freq <= 60) { /* Range for the second note */
+    else if (beam1.freq >= 41 && beam1.freq <= 80) { /* Range for the second note */
       beam1.difference = 2; /* Set DIFFERENCE to 2 for the second note */
     }
-    else if (beam1.freq >= 61 && beam1.freq <= 120) { /* Range for the third note */
+    else if (beam1.freq >= 81 && beam1.freq <= 120) { /* Range for the third note */
       beam1.difference = 3; /* Set DIFFERENCE to 3 for the third note */
     }
     else if (beam1.freq >= 121 && beam1.freq <= 280) { /* Range for the fourth note */
@@ -336,13 +336,13 @@ ISR (TIMER1_COMPA_vect)
     /* Now find the arithmetic mean of the reads */
     beam2.freq /= 4;
 
-    if (beam2.freq <= 2) { /* Range for the first note */
+    if (beam2.freq <= 40) { /* Range for the first note */
       beam2.difference = 1; /* Set DIFFERENCE to 1 for the first note */
     }
-    else if (beam2.freq >= 3 && beam2.freq <= 60) { /* Range for the second note */
+    else if (beam2.freq >= 41 && beam2.freq <= =80) { /* Range for the second note */
       beam2.difference = 2; /* Set DIFFERENCE to 2 for the second note */
     }
-    else if (beam2.freq >= 61 && beam2.freq <= 120) { /* Range for the third note */
+    else if (beam2.freq >= 81 && beam2.freq <= 120) { /* Range for the third note */
       beam2.difference = 3; /* Set DIFFERENCE to 3 for the third note */
     }
     else if (beam2.freq >= 121 && beam2.freq <= 280) { /* Range for the fourth note */
