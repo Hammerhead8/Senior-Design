@@ -34,6 +34,13 @@ Beam beam2;
 void
 setup ()
 {
+  /* Set the clock prescaler to 1 to try to prevent weird timing shit.
+   * The default for the ATMega2560 is for the clock to be set to 8 MHz
+   * when a reset occurs. Setting the clock prescaler to 1 allows the 16 MHz
+   * resonator to be used as the clock source at its normal frequency */
+  CLKPR = 0x80; /* Enable clock prescaler changes */
+  CLKPR = 0x00; /* Set the clock prescaler to a division factor of 1 */
+
   /* DDRx sets the direction of the pin as either input (0) or output (1) */
   DDRG = 0x20; /* Configure digital pin 4 as an output */
   PORTG &= 0x00; /* Start with pin 4 set LOW */
@@ -62,8 +69,9 @@ setup ()
    * to look laggy. */
   TCCR1A &= 0x00; /* Clear Timer/Counter 1 Control Register A */
   TCCR1B &= 0x00; /* Clear Timer/Counter 1 Control Register B */
-  OCR1A = 24999; /* (16000000 / (12.5 * 64) - 1 = 24999 for an 100 ms delay */
-//  TIMSK1 |= (1 << OCIE1A); /* Enable Timer 1 compare interrupts */
+  OCR1A = 9999; /* (16000000 / (12.5 * 64) - 1 = 24999 for an 100 ms delay
+                 * but the MCU is fucking around so we need OCR1A = 9999
+                 * for a similar delay because reasons. */
   TIMSK1 = 0x02; /* Enable Timer 1 compare interrupts */
 
   /* Enable external interrupts on pins 2, 3, 18, 19, 20, and 21
