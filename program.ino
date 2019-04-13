@@ -22,12 +22,11 @@
 
 /* Create an instance of the class Beam for each beam being used called beamx */
 Beam beam1;
-/* Uncomment these as more beams are added */
 Beam beam2;
-//Beam beam3;
-//Beam beam4;
-//Beam beam5;
-//Beam beam6;
+Beam beam3;
+Beam beam4;
+Beam beam5;
+Beam beam6;
 
 /* Configure the input and output pins */
 /* Also configure the timer and enable interrupts */
@@ -44,6 +43,7 @@ setup ()
   /* DDRx sets the direction of the pin as either input (0) or output (1) */
   DDRG = 0x20; /* Configure digital pin 4 as an output */
   PORTG &= 0x00; /* Start with pin 4 set LOW */
+  DDRD &= ~(0x0f); /* Configure pins 18, 19, 20, and 21 as input */
   DDRE &= ~(0x18); /* Configure pins 2 and 3 as an input */
   DDRF &= 0x00;/* Configure the analog pins as inputs */
   
@@ -81,10 +81,10 @@ setup ()
    * the flag whenever the photoresistor is covered or uncovered */
   attachInterrupt (digitalPinToInterrupt (2), playBeam1, CHANGE);
   attachInterrupt (digitalPinToInterrupt (3), playBeam2, CHANGE);
-//  attachInterrupt (digitalPinToInterrupt (18), playBeam3, CHANGE);
-//  attachInterrupt (digitalPinToInterrupt (19), playBeam4, CHANGE);
-//  attachInterrupt (digitalPinToInterrupt (20), playBeam5, CHANGE);
-//  attachInterrupt (digitalPinToInterrupt (21), playBeam6, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (18), playBeam3, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (19), playBeam4, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (20), playBeam5, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (21), playBeam6, CHANGE);
 
 }
 
@@ -177,6 +177,166 @@ loop ()
       else if (beam2.difference == 7) { /* If the seventh note is being played */
         tone (4, NOTE7_2);
         while (beam2.difference == 7) {}
+        noTone (4);
+      } /* End if */
+    } /* End while */
+  } /* End if */
+
+  else if (beam3.note != 0) { /* If the third beam is active */
+    while (beam3.note != 0) {
+      if (beam3.difference == 1) { /* If the first note is being played */
+        tone (4, NOTE1_3);
+        while (beam3.difference == 1) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 2) { /* If the second note is being played */
+        tone (4, NOTE2_3);
+        while (beam3.difference == 2) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 3) { /* If the third note is being played */
+        tone (4, NOTE3_3);
+        while (beam3.difference == 3) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 4) { /* If the fourth note is being played */
+        tone (4, NOTE4_3);
+        while (beam3.difference == 4) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 5) { /* If the fifth note is being played */
+        tone (4, NOTE5_3);
+        while (beam3.difference == 5) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 6) { /* If the sixth note is being played */
+        tone (4, NOTE6_3);
+        while (beam3.difference == 6) {}
+        noTone (4);
+      }
+      else if (beam3.difference == 7) { /* If the seventh note is being played */
+        tone (4, NOTE7_3);
+        while (beam3.difference == 7) {}
+        noTone (4);
+      } /* End if */
+    } /* End while */
+  } /* End else if */
+
+  else if (beam4.note != 0) { /* If the fourth beam is active */
+    while (beam4.note != 0) {
+      if (beam4.difference == 1) { /* If the first note is being played */
+        tone (4, NOTE1_4);
+        while (beam4.difference == 1) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 2) { /* If the second note is being played */
+        tone (4, NOTE2_4);
+        while (beam4.difference == 2) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 3) { /* If the third note is being played */
+        tone (4, NOTE3_4);
+        while (beam4.difference == 3) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 4) { /* If the fourth note is being played */
+        tone (4, NOTE4_4);
+        while (beam4.difference == 5) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 5) { /* If the fifth note is being played */
+        tone (4, NOTE5_4);
+        while (beam4.difference == 5) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 6) { /* If the sixth note is being played */
+        tone (4, NOTE6_4);
+        while (beam4.difference == 6) {}
+        noTone (4);
+      }
+      else if (beam4.difference == 7) { /* If the seventh note is being played */
+        tone (4, NOTE7_4);
+        while (beam4.difference == 7) {}
+        noTone (4);
+      } /* End if */
+    } /* End while */
+  } /* End else if */
+
+  else if (beam5.note != 0) { /* If the fifth beam is active */
+    while (beam5.note != 0) {
+      if (beam5.difference == 1) { /* If the first note is being played */
+        tone (4, NOTE1_5);
+        while (beam5.difference == 1) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 2) { /* If the second note is being played */
+        tone (4, NOTE2_5);
+        while (beam5.difference == 2) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 3) { /* If the third note is being played */
+        tone (4, NOTE3_5);
+        while (beam5.difference == 3) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 4) { /* If the fourth note is being played */
+        tone (4, NOTE4_5);
+        while (beam5.difference == 4) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 5) { /* If the fifth note is being played */
+        tone (4, NOTE5_5);
+        while (beam5.difference == 5) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 6) { /* If the sixth note is being played */
+        tone (4, NOTE6_5);
+        while (beam5.difference == 6) {}
+        noTone (4);
+      }
+      else if (beam5.difference == 7) { /* If the seventh note is being played */
+        tone (4, NOTE7_5);
+        while (beam5.difference == 7) {}
+        noTone (4);
+      } /* End if */
+    } /* End while */
+  } /* End else if */
+
+  else if (beam6.note != 0) { /* If the sixth beam is active */
+    while (beam6.note != 0) {
+      if (beam6.difference == 1) { /* If the first note is being played */
+        tone (4, NOTE1_6);
+        while (beam6.difference == 1) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 2) { /* If the second note is being played */
+        tone (4, NOTE2_6);
+        while (beam6.difference == 2) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 3) { /* If the third note is being played */
+        tone (4, NOTE3_6);
+        while (beam6.difference == 3) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 4) { /* If the fourth note is being played */
+        tone (4, NOTE4_6);
+        while (beam6.difference == 4) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 5) { /* If the fifth note is being played */
+        tone (4, NOTE4_6);
+        while (beam6.difference == 5) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 6) { /* If the sixth note is being played */
+        tone (4, NOTE6_6);
+        while (beam6.difference == 6) {}
+        noTone (4);
+      }
+      else if (beam6.difference == 7) { /* If the seventh note is being played */
+        tone (4, NOTE7_6);
+        while (beam6.difference == 7) {}
         noTone (4);
       } /* End if */
     } /* End while */
@@ -282,7 +442,196 @@ playBeam2 ()
   } /* End else */
 } /* End ISR */
 
-/* Add additional ISRs for the other beams as they are implemented */
+/* ISR for the third beam. It works exactly the same as
+ * the ISR for the first beam.
+ * NOTE is toggled between 0 and 1 every time the beam is broken.
+ * When NOTE == 1 then the beam is broken and the timer is started.
+ * When NOTE == 0 then the beam is no longer broken and the timer
+ * is stopped and any note that is playing is killed */
+void
+playBeam3 ()
+{
+  beam3.note ^= 1; /* Toggle NOTE */
+  if (beam3.note == 1) { /* If the beam is broken */
+    beam3.freq = analogRead (A2); /* Get an initial reading from the ADC */
+
+    if (beam3.freq <= 30) { /* Range of the first note */
+      beam3.difference = 1;
+    }
+    else if (beam3.freq >= 31 && beam3.freq <= 60) { /* Range of the second note */
+      beam3.difference = 2;
+    }
+    else if (beam3.freq >= 61 && beam3.freq <= 120) { /* Range of the third note */
+      beam3.difference = 3;
+    }
+    else if (beam3.freq >= 121 && beam3.freq <= 280) { /* Range of the fourth note */
+      beam3.difference = 4;
+    }
+    else if (beam3.freq >= 281 && beam3.freq <= 460) { /* Range of the fifth note */
+      beam3.difference = 5;
+    }
+    else if (beam3.freq >= 461 && beam3.freq <= 750) { /* Range of the sixth note */
+      beam3.difference = 6;
+    }
+    else if (beam3.freq >= 751) { /* Range of the seventh note */
+      beam3.difference = 7;
+    }
+
+    TCCR1B |= 0x0b; /* Enable the timer */
+    TCNT1 = 0; /* Start the timer from 0 */
+  }
+
+  else { /* If the beam is no longer broken */
+    noTone (4);
+    beam3.freq = -1;
+    beam3.difference = -1;
+    TCCR1B &= 0x00; /* Disable the timer */
+  } /* End if */
+} /* End ISR */
+
+/* ISR for the fourth beam. It works exactly the same as
+ * the ISR for the first beam.
+ * NOTE is toggled between 0 and 1 every time the beam is broken.
+ * When NOTE == 1 then the beam is broken and the timer is started.
+ * When NOTE == 0 then the beam is no longer broken and the timer
+ * is stopped and any note that is playing is killed */
+void
+playBeam4 ()
+{
+  beam4.note ^= 1; /* Toggle NOTE */
+
+  if (beam4.note == 1) { /* If the beam is broken */
+    beam4.freq = analogRead (A3);
+
+    if (beam4.freq <= 30) { /* Range of the first note */
+      beam4.difference = 1;
+    }
+    else if (beam4.freq >= 31 && beam4.freq <= 60) { /* Range of the second note */
+      beam4.difference = 2;
+    }
+    else if (beam4.freq >= 61 && beam4.freq <= 120) { /* Range of the third note */
+      beam4.difference = 3;
+    }
+    else if (beam4.freq >= 121 && beam4.freq <= 280) { /* Range of the fourth note */
+      beam4.difference = 4;
+    }
+    else if (beam4.freq >= 281 && beam4.freq <= 460) { /* Range of the fifth note */
+      beam4.difference = 5;
+    }
+    else if (beam4.freq >= 461 && beam4.freq >= 750) { /* Range of the sixth note */
+      beam4.difference = 6;
+    }
+    else if (beam4.freq >= 751) { /* Range of the seventh note */
+      beam4.difference = 7;
+    }
+
+    TCCR1B |= 0x0b; /* Enable the timer */
+    TCNT1 = 0; /* Start the timer from 0 */
+  }
+
+  else { /* If the beam is no longer broken */
+    noTone (4);
+    beam4.freq = -1;
+    beam4.differece = -1;
+    TCCR1B &= 0x00; /* Disable the timer */
+  } /* End if */
+} /* End ISR */
+
+/* ISR for the fifth beam. It works exactly the same as
+ * the ISR for the first beam.
+ * NOTE is toggled between 0 and 1 every time the beam is broken.
+ * When NOTE == 1 then the beam is broken and the timer is started.
+ * When NOTE == 0 then the beam is no longer broken and the timer
+ * is stopped and any note that is playing is killed */
+void
+playBeam5 ()
+{
+  beam5.note ^= 1; /* Toggle NOTE */
+
+  if (beam5.note == 1) { /* If the beam is broken */
+    beam5.freq = analogRead (A3);
+
+    if (beam5.freq <= 30) { /* Range of the first note */
+      beam4.difference = 1;
+    }
+    else if (beam5.freq >= 31 && beam5.freq <= 60) { /* Range of the second note */
+      beam.difference = 2;
+    }
+    else if (beam5.freq >= 61 && beam5.freq <= 120) { /* Range of the third note */
+      beam.difference = 3;
+    }
+    else if (beam5.freq >= 121 && beam5.freq <= 280) { /* Range of the fourth note */
+      beam.difference = 4;
+    }
+    else if (beam5.freq >= 281 && beam5.freq <= 460) { /* Range of the fifth note */
+      beam.difference = 5;
+    }
+    else if (beam5.freq >= 461 && beam5.freq >= 750) { /* Range of the sixth note */
+      beam.difference = 6;
+    }
+    else if (beam5.freq >= 751) { /* Range of the seventh note */
+      beam.difference = 7;
+    }
+
+    TCCR1B |= 0x0b; /* Enable the timer */
+    TCNT1 = 0; /* Start the timer from 0 */
+  }
+
+  else { /* If the beam is no longer broken */
+    noTone (4);
+    beam5.freq = -1;
+    beam5.differece = -1;
+    TCCR1B &= 0x00; /* Disable the timer */
+  } /* End if */
+} /* End ISR */
+
+/* ISR for the sixth beam. It works exactly the same as
+ * the ISR for the first beam.
+ * NOTE is toggled between 0 and 1 every time the beam is broken.
+ * When NOTE == 1 then the beam is broken and the timer is started.
+ * When NOTE == 0 then the beam is no longer broken and the timer
+ * is stopped and any note that is playing is killed */
+void
+playBeam6 ()
+{
+  beam5.note ^= 1; /* Toggle NOTE */
+
+  if (beam.note == 1) { /* If the beam is broken */
+    beam6.freq = analogRead (A3);
+
+    if (beam.freq <= 30) { /* Range of the first note */
+      beam6.difference = 1;
+    }
+    else if (beam6.freq >= 31 && beam6.freq <= 60) { /* Range of the second note */
+      beam6.difference = 2;
+    }
+    else if (beam6.freq >= 61 && beam6.freq <= 120) { /* Range of the third note */
+      beam6.difference = 3;
+    }
+    else if (beam6.freq >= 121 && beam6.freq <= 280) { /* Range of the fourth note */
+      beam6.difference = 4;
+    }
+    else if (beam6.freq >= 281 && beam6.freq <= 460) { /* Range of the fifth note */
+      beam6.difference = 5;
+    }
+    else if (beam6.freq >= 461 && beam6.freq >= 750) { /* Range of the sixth note */
+      beam6.difference = 6;
+    }
+    else if (beam6.freq >= 751) { /* Range of the seventh note */
+      beam6.difference = 7;
+    }
+
+    TCCR1B |= 0x0b; /* Enable the timer */
+    TCNT1 = 0; /* Start the timer from 0 */
+  }
+
+  else { /* If the beam is no longer broken */
+    noTone (4);
+    beam6.freq = -1;
+    beam6.differece = -1;
+    TCCR1B &= 0x00; /* Disable the timer */
+  } /* End if */
+} /* End ISR */
 
 /* Timer1 interrupt vector */
 /* When a timer interrupt occurs we will take three readings from the ADC.
@@ -364,6 +713,162 @@ ISR (TIMER1_COMPA_vect)
     }
     else if (beam2.freq >= 751) { /* Range for the seventh note */
       beam2.difference = 7; /* Set DIFFERENCE to 7 for the seventh note */
+    } /* End if */
+  } /* End if */
+
+  else if (beam3.note != 0) { /* If the second beam is broken */
+    /* Take four successive reads from channel 1 of the ADC */
+    beam3.freqReads[0] = analogRead (A2);
+    beam3.freqReads[1] = analogRead (A2);
+    beam3.freqReads[2] = analogRead (A2);
+    beam3.freqReads[3] = analogRead (A2);
+
+    /* Sum the four reads together */
+    beam3.freq = beam3.freqReads[0];
+    beam3.freq += beam3.freqReads[1];
+    beam3.freq += beam3.freqReads[2];
+    beam3.freq += beam3.freqReads[3];
+
+    /* Now find the arithmetic mean of the reads */
+    beam3.freq /= 4;
+
+    if (beam3.freq <= 30) { /* Range for the first note */
+      beam3.difference = 1; /* Set DIFFERENCE to 1 for the first note */
+    }
+    else if (beam3.freq >= 31 && beam3.freq <= 60) { /* Range for the second note */
+      beam3.difference = 2; /* Set DIFFERENCE to 2 for the second note */
+    }
+    else if (beam3.freq >= 61 && beam3.freq <= 120) { /* Range for the third note */
+      beam3.difference = 3; /* Set DIFFERENCE to 3 for the third note */
+    }
+    else if (beam3.freq >= 121 && beam3.freq <= 280) { /* Range for the fourth note */
+      beam3.difference = 4; /* Set DIFFERENCE to 4 for the fourth note */
+    }
+    else if (beam3.freq >= 281 && beam3.freq <= 460) { /* Range for the fifth note */
+      beam3.difference = 5; /* Set DIFFERENCE to 5 for the fifth note */
+    }
+    else if (beam3.freq >= 281 && beam3.freq <= 750) { /* Range for the sixth note */
+      beam3.difference = 6; /* Set DIFFERENCE to 6 for the sixth note */
+    }
+    else if (beam3.freq >= 751) { /* Range for the seventh note */
+      beam3.difference = 7; /* Set DIFFERENCE to 7 for the seventh note */
+    } /* End if */
+  } /* End if */
+
+  else if (beam4.note != 0) { /* If the fourth beam is broken */
+    /* Take four successive reads from channel 1 of the ADC */
+    beam4.freqReads[0] = analogRead (A3);
+    beam4.freqReads[1] = analogRead (A3);
+    beam4.freqReads[2] = analogRead (A3);
+    beam4.freqReads[3] = analogRead (A3);
+
+    /* Sum the four reads together */
+    beam4.freq = beam4.freqReads[0];
+    beam4.freq += beam4.freqReads[1];
+    beam4.freq += beam4.freqReads[2];
+    beam4.freq += beam4.freqReads[3];
+
+    /* Now find the arithmetic mean of the reads */
+    beam4.freq /= 4;
+
+    if (beam4.freq <= 30) { /* Range for the first note */
+      beam4.difference = 1; /* Set DIFFERENCE to 1 for the first note */
+    }
+    else if (beam4.freq >= 31 && beam4.freq <= 60) { /* Range for the second note */
+      beam4.difference = 2; /* Set DIFFERENCE to 2 for the second note */
+    }
+    else if (beam4.freq >= 61 && beam4.freq <= 120) { /* Range for the third note */
+      beam4.difference = 3; /* Set DIFFERENCE to 3 for the third note */
+    }
+    else if (beam4.freq >= 121 && beam4.freq <= 280) { /* Range for the fourth note */
+      beam4.difference = 4; /* Set DIFFERENCE to 4 for the fourth note */
+    }
+    else if (beam4.freq >= 281 && beam4.freq <= 460) { /* Range for the fifth note */
+      beam4.difference = 5; /* Set DIFFERENCE to 5 for the fifth note */
+    }
+    else if (beam4.freq >= 281 && beam4.freq <= 750) { /* Range for the sixth note */
+      beam4.difference = 6; /* Set DIFFERENCE to 6 for the sixth note */
+    }
+    else if (beam4.freq >= 751) { /* Range for the seventh note */
+      beam4.difference = 7; /* Set DIFFERENCE to 7 for the seventh note */
+    } /* End if */
+  } /* End if */
+
+  else if (beam5.note != 0) { /* If the fifth beam is broken */
+    /* Take four successive reads from channel 1 of the ADC */
+    beam5.freqReads[0] = analogRead (A4);
+    beam5.freqReads[1] = analogRead (A4);
+    beam5.freqReads[2] = analogRead (A4);
+    beam5.freqReads[3] = analogRead (A4);
+
+    /* Sum the four reads together */
+    beam5.freq = beam5.freqReads[0];
+    beam5.freq += beam5.freqReads[1];
+    beam5.freq += beam5.freqReads[2];
+    beam5.freq += beam5.freqReads[3];
+
+    /* Now find the arithmetic mean of the reads */
+    beam5.freq /= 4;
+
+    if (beam5.freq <= 30) { /* Range for the first note */
+      beam5.difference = 1; /* Set DIFFERENCE to 1 for the first note */
+    }
+    else if (beam5.freq >= 31 && beam5.freq <= 60) { /* Range for the second note */
+      beam5.difference = 2; /* Set DIFFERENCE to 2 for the second note */
+    }
+    else if (beam5.freq >= 61 && beam5.freq <= 120) { /* Range for the third note */
+      beam5.difference = 3; /* Set DIFFERENCE to 3 for the third note */
+    }
+    else if (beam5.freq >= 121 && beam5.freq <= 280) { /* Range for the fourth note */
+      beam5.difference = 4; /* Set DIFFERENCE to 4 for the fourth note */
+    }
+    else if (beam5.freq >= 281 && beam5.freq <= 460) { /* Range for the fifth note */
+      beam5.difference = 5; /* Set DIFFERENCE to 5 for the fifth note */
+    }
+    else if (beam5.freq >= 281 && beam5.freq <= 750) { /* Range for the sixth note */
+      beam5.difference = 6; /* Set DIFFERENCE to 6 for the sixth note */
+    }
+    else if (beam5.freq >= 751) { /* Range for the seventh note */
+      beam5.difference = 7; /* Set DIFFERENCE to 7 for the seventh note */
+    } /* End if */
+  } /* End if */
+
+  else if (beam6.note != 0) { /* If the sixth beam is broken */
+    /* Take four successive reads from channel 1 of the ADC */
+    beam6.freqReads[0] = analogRead (A5);
+    beam6.freqReads[1] = analogRead (A5);
+    beam6.freqReads[2] = analogRead (A5);
+    beam6.freqReads[3] = analogRead (A5);
+
+    /* Sum the four reads together */
+    beam6.freq = beam6.freqReads[0];
+    beam6.freq += beam6.freqReads[1];
+    beam6.freq += beam6.freqReads[2];
+    beam6.freq += beam6.freqReads[3];
+
+    /* Now find the arithmetic mean of the reads */
+    beam6.freq /= 4;
+
+    if (beam6.freq <= 30) { /* Range for the first note */
+      beam6.difference = 1; /* Set DIFFERENCE to 1 for the first note */
+    }
+    else if (beam6.freq >= 31 && beam6.freq <= 60) { /* Range for the sixth note */
+      beam6.difference = 2; /* Set DIFFERENCE to 2 for the sixth note */
+    }
+    else if (beam6.freq >= 61 && beam6.freq <= 120) { /* Range for the third note */
+      beam6.difference = 3; /* Set DIFFERENCE to 3 for the third note */
+    }
+    else if (beam6.freq >= 121 && beam6.freq <= 280) { /* Range for the fourth note */
+      beam6.difference = 4; /* Set DIFFERENCE to 4 for the fourth note */
+    }
+    else if (beam6.freq >= 281 && beam6.freq <= 460) { /* Range for the fifth note */
+      beam6.difference = 5; /* Set DIFFERENCE to 5 for the fifth note */
+    }
+    else if (beam6.freq >= 281 && beam6.freq <= 750) { /* Range for the sixth note */
+      beam6.difference = 6; /* Set DIFFERENCE to 6 for the sixth note */
+    }
+    else if (beam6.freq >= 751) { /* Range for the seventh note */
+      beam6.difference = 7; /* Set DIFFERENCE to 7 for the seventh note */
     } /* End if */
   } /* End if */
 } /* End ISR */
