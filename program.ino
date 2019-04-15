@@ -46,6 +46,35 @@ setup ()
   DDRD &= ~(0x0f); /* Configure pins 18, 19, 20, and 21 as input */
   DDRE &= ~(0x18); /* Configure pins 2 and 3 as an input */
   DDRF &= 0x00;/* Configure the analog pins as inputs */
+
+  /* Configure the unused I/O pins as inputs and drive them low */
+  /* Port A */
+  DDRA &= 0x00;;
+  PORTA |= 0xff;
+
+  /* Port B */
+  DDRB &= 0x00;
+  PORTB |= 0xff;
+
+  /* Port C */
+  DDRC &= 0x00;
+  PORTC |= 0xff;
+
+  /* Port H */
+  DDRH &= 0x00;
+  PORTH |= 0xff;
+
+  /* Port J */
+  DDRJ &= 0x00;
+  PORTJ |= 0xff;
+
+  /* Port K */
+  DDRK &= 0x00;
+  PORTK |= 0xff;
+
+  /* Port L */
+  DDRL &= 0x00;
+  PORTL |= 0xff;;
   
   /* The Power Reduction Registers (PRR0 and PRR1) can be used to turn
    * off things that aren't needed to save power */
