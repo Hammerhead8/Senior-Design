@@ -1,19 +1,19 @@
 /* Test program using interrupts to trigger sounds for six beams
- * If two beams are broken at the same time, then the one broken first
- * will be played */
+   If two beams are broken at the same time, then the one broken first
+   will be played */
 
 /* The formula for the value for OCR1A is as follows:
- * compare match register = [ 16,000,000Hz/ (prescaler * desired interrupt frequency) ] - 1
- *
- * The formula for the interrupt frequency is as follows:
- * interrupt frequency (Hz) = (Arduino clock speed 16,000,000Hz)
- *             / (prescaler * (compare match register + 1))
- *
- * Since we want an interrupt every 80 milliseconds, the desired interrupt
- * frequency is 12.5 Hz
- *
- * Using a prescale value of f_clk / 64, this gives a OCRA1 value of
- * [16000000 / (64 * 12.5)) - 1 = 19999 */
+   compare match register = [ 16,000,000Hz/ (prescaler * desired interrupt frequency) ] - 1
+
+   The formula for the interrupt frequency is as follows:
+   interrupt frequency (Hz) = (Arduino clock speed 16,000,000Hz)
+               / (prescaler * (compare match register + 1))
+
+   Since we want an interrupt every 80 milliseconds, the desired interrupt
+   frequency is 12.5 Hz
+
+   Using a prescale value of f_clk / 64, this gives a OCRA1 value of
+   [16000000 / (64 * 12.5)) - 1 = 19999 */
 
 /* Writing 0 to bits 0, 1, and 2 of TCCR3B disables the counter just FYI */
 //#include <avr/sleep.h> /* For sleep_enable */
@@ -34,9 +34,9 @@ void
 setup ()
 {
   /* Set the clock prescaler to 1 to try to prevent weird timing shit.
-   * The default for the ATMega2560 is for the clock to be set to 8 MHz
-   * when a reset occurs. Setting the clock prescaler to 1 allows the 16 MHz
-   * resonator to be used as the clock source at its normal frequency */
+     The default for the ATMega2560 is for the clock to be set to 8 MHz
+     when a reset occurs. Setting the clock prescaler to 1 allows the 16 MHz
+     resonator to be used as the clock source at its normal frequency */
   CLKPR = 0x80; /* Enable clock prescaler changes */
   CLKPR = 0x00; /* Set the clock prescaler to a division factor of 1 */
 
@@ -75,39 +75,39 @@ setup ()
   /* Port L */
   DDRL &= 0x00;
   PORTL |= 0xff;;
-  
+
   /* The Power Reduction Registers (PRR0 and PRR1) can be used to turn
-   * off things that aren't needed to save power */
+     off things that aren't needed to save power */
   PRR0 = 0xa6;
   PRR1 = 0x3f;
 
   /* The Sleep Mode Control Register (SMCR) is used to select the sleep
-   * mode for the MCU. writing 0x00 to it selects idle mode without
-   * also setting the sleep enable bit. This will be done later.
-   * Using any mode other than idle mode only allows for using level
-   * interrupts (HIGH or LOW) in attachInterrupt. Since we need an
-   * interrupt whenever the voltage changes on all of the beams,
-   * we have to use idle mode. */
-//  SMCR = 0x00;
+     mode for the MCU. writing 0x00 to it selects idle mode without
+     also setting the sleep enable bit. This will be done later.
+     Using any mode other than idle mode only allows for using level
+     interrupts (HIGH or LOW) in attachInterrupt. Since we need an
+     interrupt whenever the voltage changes on all of the beams,
+     we have to use idle mode. */
+  //  SMCR = 0x00;
 
   /* Configure timer 1 to interrupt every 100 milliseconds when reading from the ADC */
   /* WGM10 = 0, WGM11 = 0, WGM12 = 1, WGM13 = 0 */
   /* Whenever a timer interrupt occurs read from the ADC
-   * This might help reduce the noise currently being heard */
+     This might help reduce the noise currently being heard */
   /* Remember:  100 ms is the maximum delay before a UI starts
-   * to look laggy. */
+     to look laggy. */
   TCCR1A &= 0x00; /* Clear Timer/Counter 1 Control Register A */
   TCCR1B &= 0x00; /* Clear Timer/Counter 1 Control Register B */
   OCR1A = 9999; /* (16000000 / (12.5 * 64) - 1 = 24999 for an 100 ms delay
-                 * but the MCU is fucking around so we need OCR1A = 9999
-                 * for a similar delay because reasons. */
+                   but the MCU is fucking around so we need OCR1A = 9999
+                   for a similar delay because reasons. */
   TIMSK1 = 0x02; /* Enable Timer 1 compare interrupts */
 
   /* Enable external interrupts on pins 2, 3, 18, 19, 20, and 21
-   * The interrupt service routines will toggle a flag in order to
-   * play the note in the loop() function
-   * We will use CHANGE for the condition since we need to toggle
-   * the flag whenever the photoresistor is covered or uncovered */
+     The interrupt service routines will toggle a flag in order to
+     play the note in the loop() function
+     We will use CHANGE for the condition since we need to toggle
+     the flag whenever the photoresistor is covered or uncovered */
   attachInterrupt (digitalPinToInterrupt (2), playBeam1, CHANGE);
   attachInterrupt (digitalPinToInterrupt (3), playBeam2, CHANGE);
   attachInterrupt (digitalPinToInterrupt (18), playBeam3, CHANGE);
@@ -125,10 +125,10 @@ loop ()
 {
   /* Check if the first beam is broken */
   /* If it is then the second octave will be played */
-  
-//  SMCR |= 0x01; /* Set the Sleep Enable (SE) bit in SMCR */
-//  sleep_cpu (); /* Put the MCU to sleep */
-  
+
+  //  SMCR |= 0x01; /* Set the Sleep Enable (SE) bit in SMCR */
+  //  sleep_cpu (); /* Put the MCU to sleep */
+
   /* The ranges for the notes still need to be optimized */
 
   if (beam1.note != 0) { /* If the first beam is broken */
@@ -185,7 +185,7 @@ loop ()
       }
       else if (beam2.difference == 3) { /* If the third note is being played */
         tone (4, NOTE3_2);
-        while (beam2.difference == 3){}
+        while (beam2.difference == 3) {}
         noTone (4);
       }
       else if (beam2.difference == 4) { /* If the fourth note is being played */
@@ -370,22 +370,22 @@ loop ()
       } /* End if */
     } /* End while */
   } /* End if */
-  
+
   /* Use an else statement to check if more than one beam is broken.
-   * Also add something to the other conditionals to check that only one beam is broken. */
+     Also add something to the other conditionals to check that only one beam is broken. */
 
 } /* End loop function */
 
 
 /* ISR for the first beam
- * If BEAM1.NOTE is 1 then the beam is broken and the timer can be started.
- * If BEAM1.NOTE is 0 then the beam is no longer broken and the timer can be stopped.
- * Also, we need to kill any note that is being played and make the value in
- * BEAM1.FREQ useless by setting it to -1. */
+   If BEAM1.NOTE is 1 then the beam is broken and the timer can be started.
+   If BEAM1.NOTE is 0 then the beam is no longer broken and the timer can be stopped.
+   Also, we need to kill any note that is being played and make the value in
+   BEAM1.FREQ useless by setting it to -1. */
 void
 playBeam1 ()
 {
-//  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
+  //  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
   beam1.note ^= 1; /* Toggle NOTE */
   if (beam1.note == 1) { /* If the beam is broken */
     beam1.freq = analogRead (A0); /* Read from the ADC */
@@ -425,11 +425,11 @@ playBeam1 ()
 
 
 /* ISR for the second beam. It works exactly the same as
- * the ISR for the first beam.
- * NOTE is toggled between 0 and 1 every time the beam is broken.
- * When NOTE == 1 then the beam is broken and the timer is started.
- * When NOTE == 0 then the beam is no longer broken and the timer
- * is stopped and any note that is playing is killed */
+   the ISR for the first beam.
+   NOTE is toggled between 0 and 1 every time the beam is broken.
+   When NOTE == 1 then the beam is broken and the timer is started.
+   When NOTE == 0 then the beam is no longer broken and the timer
+   is stopped and any note that is playing is killed */
 void
 playBeam2 ()
 {
@@ -472,11 +472,11 @@ playBeam2 ()
 } /* End ISR */
 
 /* ISR for the third beam. It works exactly the same as
- * the ISR for the first beam.
- * NOTE is toggled between 0 and 1 every time the beam is broken.
- * When NOTE == 1 then the beam is broken and the timer is started.
- * When NOTE == 0 then the beam is no longer broken and the timer
- * is stopped and any note that is playing is killed */
+   the ISR for the first beam.
+   NOTE is toggled between 0 and 1 every time the beam is broken.
+   When NOTE == 1 then the beam is broken and the timer is started.
+   When NOTE == 0 then the beam is no longer broken and the timer
+   is stopped and any note that is playing is killed */
 void
 playBeam3 ()
 {
@@ -519,11 +519,11 @@ playBeam3 ()
 } /* End ISR */
 
 /* ISR for the fourth beam. It works exactly the same as
- * the ISR for the first beam.
- * NOTE is toggled between 0 and 1 every time the beam is broken.
- * When NOTE == 1 then the beam is broken and the timer is started.
- * When NOTE == 0 then the beam is no longer broken and the timer
- * is stopped and any note that is playing is killed */
+   the ISR for the first beam.
+   NOTE is toggled between 0 and 1 every time the beam is broken.
+   When NOTE == 1 then the beam is broken and the timer is started.
+   When NOTE == 0 then the beam is no longer broken and the timer
+   is stopped and any note that is playing is killed */
 void
 playBeam4 ()
 {
@@ -561,45 +561,45 @@ playBeam4 ()
   else { /* If the beam is no longer broken */
     noTone (4);
     beam4.freq = -1;
-    beam4.differece = -1;
+    beam4.difference = -1;
     TCCR1B &= 0x00; /* Disable the timer */
   } /* End if */
 } /* End ISR */
 
 /* ISR for the fifth beam. It works exactly the same as
- * the ISR for the first beam.
- * NOTE is toggled between 0 and 1 every time the beam is broken.
- * When NOTE == 1 then the beam is broken and the timer is started.
- * When NOTE == 0 then the beam is no longer broken and the timer
- * is stopped and any note that is playing is killed */
+   the ISR for the first beam.
+   NOTE is toggled between 0 and 1 every time the beam is broken.
+   When NOTE == 1 then the beam is broken and the timer is started.
+   When NOTE == 0 then the beam is no longer broken and the timer
+   is stopped and any note that is playing is killed */
 void
 playBeam5 ()
 {
   beam5.note ^= 1; /* Toggle NOTE */
 
   if (beam5.note == 1) { /* If the beam is broken */
-    beam5.freq = analogRead (A3);
+    beam5.freq = analogRead (A4);
 
     if (beam5.freq <= 30) { /* Range of the first note */
-      beam4.difference = 1;
+      beam5.difference = 1;
     }
     else if (beam5.freq >= 31 && beam5.freq <= 60) { /* Range of the second note */
-      beam.difference = 2;
+      beam5.difference = 2;
     }
     else if (beam5.freq >= 61 && beam5.freq <= 120) { /* Range of the third note */
-      beam.difference = 3;
+      beam5.difference = 3;
     }
     else if (beam5.freq >= 121 && beam5.freq <= 280) { /* Range of the fourth note */
-      beam.difference = 4;
+      beam5.difference = 4;
     }
     else if (beam5.freq >= 281 && beam5.freq <= 460) { /* Range of the fifth note */
-      beam.difference = 5;
+      beam5.difference = 5;
     }
     else if (beam5.freq >= 461 && beam5.freq >= 750) { /* Range of the sixth note */
-      beam.difference = 6;
+      beam5.difference = 6;
     }
     else if (beam5.freq >= 751) { /* Range of the seventh note */
-      beam.difference = 7;
+      beam5.difference = 7;
     }
 
     TCCR1B |= 0x0b; /* Enable the timer */
@@ -609,26 +609,26 @@ playBeam5 ()
   else { /* If the beam is no longer broken */
     noTone (4);
     beam5.freq = -1;
-    beam5.differece = -1;
+    beam5.difference = -1;
     TCCR1B &= 0x00; /* Disable the timer */
   } /* End if */
 } /* End ISR */
 
 /* ISR for the sixth beam. It works exactly the same as
- * the ISR for the first beam.
- * NOTE is toggled between 0 and 1 every time the beam is broken.
- * When NOTE == 1 then the beam is broken and the timer is started.
- * When NOTE == 0 then the beam is no longer broken and the timer
- * is stopped and any note that is playing is killed */
+   the ISR for the first beam.
+   NOTE is toggled between 0 and 1 every time the beam is broken.
+   When NOTE == 1 then the beam is broken and the timer is started.
+   When NOTE == 0 then the beam is no longer broken and the timer
+   is stopped and any note that is playing is killed */
 void
 playBeam6 ()
 {
-  beam5.note ^= 1; /* Toggle NOTE */
+  beam6.note ^= 1; /* Toggle NOTE */
 
-  if (beam.note == 1) { /* If the beam is broken */
-    beam6.freq = analogRead (A3);
+  if (beam6.note == 1) { /* If the beam is broken */
+    beam6.freq = analogRead (A5);
 
-    if (beam.freq <= 30) { /* Range of the first note */
+    if (beam6.freq <= 30) { /* Range of the first note */
       beam6.difference = 1;
     }
     else if (beam6.freq >= 31 && beam6.freq <= 60) { /* Range of the second note */
@@ -657,14 +657,14 @@ playBeam6 ()
   else { /* If the beam is no longer broken */
     noTone (4);
     beam6.freq = -1;
-    beam6.differece = -1;
+    beam6.difference = -1;
     TCCR1B &= 0x00; /* Disable the timer */
   } /* End if */
 } /* End ISR */
 
 /* Timer1 interrupt vector */
 /* When a timer interrupt occurs we will take three readings from the ADC.
- * These readings will then be averaged to try to increase accuracy of detection. */
+   These readings will then be averaged to try to increase accuracy of detection. */
 ISR (TIMER1_COMPA_vect)
 {
   if (beam1.note != 0) { /* If the first beam is broken */
