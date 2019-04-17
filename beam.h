@@ -1,5 +1,5 @@
 /* Contains the class definition that goes with the program
- * rough_draft_program.ino
+ * program.ino
  *
  * The program using this class can be scaled for use with multiple beams.
  * Just create as many instances of this class as there are beams and it
