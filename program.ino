@@ -16,7 +16,7 @@
    [16000000 / (64 * 12.5)) - 1 = 19999 */
 
 /* Writing 0 to bits 0, 1, and 2 of TCCR3B disables the counter just FYI */
-//#include <avr/sleep.h> /* For sleep_enable */
+#include <avr/sleep.h> /* For sleep_cpu */
 #include "beam.h" /* For Beam class */
 #include "notes.h" /* For note frequency definitions */
 
@@ -88,7 +88,7 @@ setup ()
      interrupts (HIGH or LOW) in attachInterrupt. Since we need an
      interrupt whenever the voltage changes on all of the beams,
      we have to use idle mode. */
-  //  SMCR = 0x00;
+  SMCR = 0x00;
 
   /* Configure timer 1 to interrupt every 100 milliseconds when reading from the ADC */
   /* WGM10 = 0, WGM11 = 0, WGM12 = 1, WGM13 = 0 */
@@ -126,8 +126,8 @@ loop ()
   /* Check if the first beam is broken */
   /* If it is then the second octave will be played */
 
-  //  SMCR |= 0x01; /* Set the Sleep Enable (SE) bit in SMCR */
-  //  sleep_cpu (); /* Put the MCU to sleep */
+    SMCR |= 0x01; /* Set the Sleep Enable (SE) bit in SMCR */
+    sleep_cpu (); /* Put the MCU to sleep */
 
   /* The ranges for the notes still need to be optimized */
 
@@ -385,8 +385,9 @@ loop ()
 void
 playBeam1 ()
 {
-  //  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
   beam1.note ^= 1; /* Toggle NOTE */
+
   if (beam1.note == 1) { /* If the beam is broken */
     beam1.freq = analogRead (A0); /* Read from the ADC */
 
@@ -433,7 +434,9 @@ playBeam1 ()
 void
 playBeam2 ()
 {
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
   beam2.note ^= 1; /* Toggle NOTE */
+
   if (beam2.note == 1) { /* If the beam is broken */
     beam2.freq = analogRead (A1); /* Read from the ADC */
 
@@ -480,7 +483,9 @@ playBeam2 ()
 void
 playBeam3 ()
 {
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
   beam3.note ^= 1; /* Toggle NOTE */
+
   if (beam3.note == 1) { /* If the beam is broken */
     beam3.freq = analogRead (A2); /* Get an initial reading from the ADC */
 
@@ -527,6 +532,7 @@ playBeam3 ()
 void
 playBeam4 ()
 {
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
   beam4.note ^= 1; /* Toggle NOTE */
 
   if (beam4.note == 1) { /* If the beam is broken */
@@ -576,6 +582,7 @@ void
 playBeam5 ()
 {
   beam5.note ^= 1; /* Toggle NOTE */
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
 
   if (beam5.note == 1) { /* If the beam is broken */
     beam5.freq = analogRead (A4);
@@ -624,6 +631,7 @@ void
 playBeam6 ()
 {
   beam6.note ^= 1; /* Toggle NOTE */
+  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
 
   if (beam6.note == 1) { /* If the beam is broken */
     beam6.freq = analogRead (A5);
