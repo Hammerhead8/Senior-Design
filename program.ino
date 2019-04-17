@@ -110,10 +110,10 @@ setup ()
      the flag whenever the photoresistor is covered or uncovered */
   attachInterrupt (digitalPinToInterrupt (2), playBeam1, CHANGE);
   attachInterrupt (digitalPinToInterrupt (3), playBeam2, CHANGE);
-  attachInterrupt (digitalPinToInterrupt (18), playBeam3, CHANGE);
-  attachInterrupt (digitalPinToInterrupt (19), playBeam4, CHANGE);
-  attachInterrupt (digitalPinToInterrupt (20), playBeam5, CHANGE);
-  attachInterrupt (digitalPinToInterrupt (21), playBeam6, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (21), playBeam3, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (20), playBeam4, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (19), playBeam5, CHANGE);
+  attachInterrupt (digitalPinToInterrupt (18), playBeam6, CHANGE);
 
 }
 
