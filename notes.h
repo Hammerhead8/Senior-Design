@@ -20,25 +20,25 @@ firstOctave
 enum
 secondOctave
 {
-  NOTE1_2 = 262,
-  NOTE2_2 = 294,
-  NOTE3_2 = 330,
-  NOTE4_2 = 349,
-  NOTE5_2 = 392,
-  NOTE6_2 = 440,
-  NOTE7_2 = 494
+  NOTE1_2 = 131,
+  NOTE2_2 = 147,
+  NOTE3_2 = 165,
+  NOTE4_2 = 175,
+  NOTE5_2 = 169,
+  NOTE6_2 = 220,
+  NOTE7_2 = 247
 };
 
 enum
 thirdOctave
 {
-  NOTE1_3 = 523,
-  NOTE2_3 = 587,
-  NOTE3_3 = 659,
-  NOTE4_3 = 698,
-  NOTE5_3 = 784,
-  NOTE6_3 = 880,
-  NOTE7_3 = 988
+  NOTE1_3 = 262,
+  NOTE2_3 = 294,
+  NOTE3_3 = 330,
+  NOTE4_3 = 349,
+  NOTE5_3 = 392,
+  NOTE6_3 = 440,
+  NOTE7_3 = 494
 };
 
 enum
@@ -62,7 +62,7 @@ fifthOctave
   NOTE4_5 = 1397,
   NOTE5_5 = 1568,
   NOTE6_5 = 1760,
-  NOTE7_5 = 1967
+  NOTE7_5 = 1976
 };
 
 enum

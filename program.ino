@@ -115,6 +115,8 @@ setup ()
   attachInterrupt (digitalPinToInterrupt (19), playBeam5, CHANGE);
   attachInterrupt (digitalPinToInterrupt (18), playBeam6, CHANGE);
 
+  noTone (4); /* Likes to play notes here, so stop any that started. */
+
 }
 
 /* Main loop */
@@ -168,6 +170,8 @@ loop ()
         while (beam1.difference == 7) {}
         noTone (4);
       } /* end if */
+      else { /* If DIFFERENCE is any other value */
+        noTone(4);
     } /* End while */
   } /* End if */
 
