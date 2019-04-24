@@ -119,9 +119,11 @@ setup ()
 
 }
 
-/* Main loop */
-/* The analogRead() function returns a number between 0 and 1023. */
-/* This number will be used to determine which note to play. */
+/* Main loop
+ * The beam that was broken is determined by the value of NOTE. If one is
+ * already playing and another is broken, then the first one keeps playing
+ * until it is no longer broken. Then the second will start playing if it is
+ * still broken. This is also where the notes are actually played. */
 void
 loop ()
 {
@@ -496,7 +498,7 @@ playBeam3 ()
 
   beam3.note = PIND & 0x01;
   
-  if (beam3.note == 1) { /* If the beam is broken */
+  if (beam3.note != 0) { /* If the beam is broken */
     beam3.freq = analogRead (A2); /* Get an initial reading from the ADC */
 
     if (beam3.freq <= 30) { /* Range of the first note */
@@ -545,7 +547,7 @@ playBeam4 ()
 //  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
 //  beam4.note ^= 1; /* Toggle NOTE */
 
-  beam4.note = (PIND & 0x02) >> 1; /* Capture the state of pin 20 */
+  beam4.note = PIND & 0x02; /* Capture the state of pin 20 */
 
   if (beam4.note != 0) { /* If the beam is broken */
     beam4.freq = analogRead (A3);
@@ -596,7 +598,7 @@ playBeam5 ()
 //  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
 //  beam5.note ^= 1; /* Toggle NOTE */
 
-  beam5.note = (PIND & 0x04) >> 2; /* Capture the state of pin 19 */
+  beam5.note = PIND & 0x04; /* Capture the state of pin 19 */
 
   if (beam5.note != 0) { /* If the beam is broken */
     beam5.freq = analogRead (A4);
@@ -647,7 +649,7 @@ playBeam6 ()
 //  SMCR &= ~(0x01); /* Clear the Sleep Enable bit */
 //  beam6.note ^= 1; /* Toggle NOTE */
 
-  beam6.note = (PIND & 0x08) >> 3; /* Capture the state of pin 18 */
+  beam6.note = PIND & 0x08; /* Capture the state of pin 18 */
 
   if (beam6.note != 0) { /* If the beam is broken */
     beam6.freq = analogRead (A5);
